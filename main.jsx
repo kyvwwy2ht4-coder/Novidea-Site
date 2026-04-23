@@ -1,153 +1,129 @@
 import React, { useState } from "react";
 import { createRoot } from "react-dom/client";
 
+const styles = {
+  container: {
+    fontFamily: "Arial, sans-serif",
+    background: "#f9fafb",
+    color: "#111827",
+    minHeight: "100vh",
+  },
+  header: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: "20px",
+    borderBottom: "1px solid #e5e7eb",
+    background: "#ffffff",
+  },
+  button: {
+    background: "#16a34a",
+    color: "white",
+    padding: "10px 16px",
+    borderRadius: "8px",
+    border: "none",
+    cursor: "pointer",
+  },
+  main: {
+    maxWidth: "1000px",
+    margin: "0 auto",
+    padding: "40px 20px",
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr",
+    gap: "40px",
+  },
+  card: {
+    background: "#ffffff",
+    padding: "20px",
+    borderRadius: "12px",
+    boxShadow: "0 2px 10px rgba(0,0,0,0.05)",
+  },
+  input: {
+    width: "100%",
+    padding: "12px",
+    marginBottom: "10px",
+    borderRadius: "6px",
+    border: "1px solid #ccc",
+  }
+};
+
 function LandingPage({ onStart }) {
   return (
-    <div className="min-h-screen bg-white text-gray-900">
-      <header className="border-b border-green-100 bg-white">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <div>
-            <h1 className="text-xl font-bold">Novidea UK</h1>
-            <p className="text-xs text-green-600">High-Risk Payments • Global Coverage</p>
-          </div>
-          <button
-            onClick={onStart}
-            className="rounded-xl bg-green-600 px-4 py-2 text-white transition hover:bg-green-700"
-          >
-            Start Application
-          </button>
-        </div>
-      </header>
-
-      <main className="mx-auto grid max-w-6xl gap-10 px-6 py-20 md:grid-cols-2 md:items-center">
+    <div style={styles.container}>
+      <div style={styles.header}>
         <div>
-          <h2 className="text-4xl font-bold tracking-tight md:text-5xl">
-            Get high-risk merchants approved fast
-          </h2>
-          <p className="mt-6 text-lg text-gray-600">
-            92% approval rate • Multi-jurisdiction acquiring • Global coverage
-          </p>
+          <h1>Novidea UK</h1>
+          <p style={{ color: "#16a34a" }}>High-Risk Payments • Global Coverage</p>
+        </div>
+        <button style={styles.button} onClick={onStart}>Start Application</button>
+      </div>
 
-          <ul className="mt-6 space-y-2 text-gray-700">
-            <li>✔ CBD, Forex, Adult, Gaming supported</li>
-            <li>✔ Ecommerce &amp; POS</li>
-            <li>✔ Fast onboarding (24–48 hours)</li>
+      <div style={styles.main}>
+        <div>
+          <h2>Get high-risk merchants approved fast</h2>
+          <p>92% approval rate • Multi-jurisdiction acquiring • Global coverage</p>
+
+          <ul>
+            <li>CBD, Forex, Adult, Gaming supported</li>
+            <li>Ecommerce & POS</li>
+            <li>Fast onboarding (24–48 hours)</li>
           </ul>
 
-          <button
-            onClick={onStart}
-            className="mt-8 rounded-xl bg-green-600 px-6 py-3 font-semibold text-white transition hover:bg-green-700"
-          >
-            Apply Now
-          </button>
+          <button style={styles.button} onClick={onStart}>Apply Now</button>
         </div>
 
-        <div className="rounded-2xl bg-green-50 p-6 shadow-sm ring-1 ring-green-100">
-          <h3 className="font-semibold">Quick Start</h3>
-          <p className="mt-2 text-sm text-gray-600">Begin your KYC application in minutes.</p>
-          <div className="mt-6 space-y-3">
-            <div className="rounded-xl bg-white p-4 ring-1 ring-green-100">
-              <p className="text-sm text-green-700">Approval rate</p>
-              <p className="mt-1 text-2xl font-bold">92%</p>
-            </div>
-            <div className="rounded-xl bg-white p-4 ring-1 ring-green-100">
-              <p className="text-sm text-green-700">Coverage</p>
-              <p className="mt-1 text-2xl font-bold">Global</p>
-            </div>
-          </div>
+        <div style={styles.card}>
+          <h3>Quick Start</h3>
+          <p>Begin your KYC application in minutes</p>
         </div>
-      </main>
+      </div>
     </div>
   );
 }
 
 function KYCForm({ onBack }) {
   const [step, setStep] = useState(0);
-  const steps = ["Business", "Owner", "Processing", "Bank", "Review"];
 
   return (
-    <div className="min-h-screen bg-green-50 p-6">
-      <div className="mx-auto max-w-4xl rounded-2xl bg-white p-8 shadow-sm ring-1 ring-green-100">
-        <button
-          onClick={onBack}
-          className="mb-4 text-sm font-medium text-green-600 hover:text-green-700"
-        >
-          ← Back
-        </button>
+    <div style={styles.container}>
+      <div style={{ maxWidth: "600px", margin: "40px auto", ...styles.card }}>
+        <button onClick={onBack}>← Back</button>
 
-        <h2 className="text-2xl font-bold">KYC Application</h2>
-        <p className="mt-1 text-sm text-gray-600">
-          Step {step + 1} of {steps.length} — {steps[step]}
-        </p>
+        <h2>KYC Application</h2>
 
-        <div className="mt-6">
-          {step === 0 && (
-            <div>
-              <input
-                className="mb-3 w-full rounded border border-gray-300 p-3"
-                placeholder="Company Name"
-              />
-              <input className="w-full rounded border border-gray-300 p-3" placeholder="Website" />
-            </div>
-          )}
+        {step === 0 && (
+          <>
+            <input style={styles.input} placeholder="Company Name" />
+            <input style={styles.input} placeholder="Website" />
+          </>
+        )}
 
-          {step === 1 && (
-            <div>
-              <input
-                className="mb-3 w-full rounded border border-gray-300 p-3"
-                placeholder="Director Name"
-              />
-              <input className="w-full rounded border border-gray-300 p-3" placeholder="Email" />
-            </div>
-          )}
+        {step === 1 && (
+          <>
+            <input style={styles.input} placeholder="Director Name" />
+            <input style={styles.input} placeholder="Email" />
+          </>
+        )}
 
-          {step === 2 && (
-            <div>
-              <input
-                className="mb-3 w-full rounded border border-gray-300 p-3"
-                placeholder="Monthly Volume"
-              />
-              <input
-                className="w-full rounded border border-gray-300 p-3"
-                placeholder="Average Ticket"
-              />
-            </div>
-          )}
+        {step === 2 && (
+          <>
+            <input style={styles.input} placeholder="Monthly Volume" />
+            <input style={styles.input} placeholder="Average Ticket" />
+          </>
+        )}
 
-          {step === 3 && (
-            <div>
-              <input className="mb-3 w-full rounded border border-gray-300 p-3" placeholder="Bank Name" />
-              <input className="w-full rounded border border-gray-300 p-3" placeholder="IBAN" />
-            </div>
-          )}
+        {step === 3 && (
+          <>
+            <input style={styles.input} placeholder="Bank Name" />
+            <input style={styles.input} placeholder="IBAN" />
+          </>
+        )}
 
-          {step === 4 && (
-            <div className="rounded-xl bg-green-50 p-4 ring-1 ring-green-100">
-              <p className="text-gray-700">Review your details and submit.</p>
-            </div>
-          )}
-        </div>
-
-        <div className="mt-6 flex justify-between">
-          <button
-            onClick={() => setStep((s) => Math.max(0, s - 1))}
-            className="rounded border border-gray-300 px-4 py-2 text-gray-700 transition hover:bg-gray-50"
-          >
-            Back
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <button onClick={() => setStep(Math.max(0, step - 1))}>Back</button>
+          <button style={styles.button} onClick={() => setStep(step + 1)}>
+            {step === 3 ? "Submit" : "Next"}
           </button>
-
-          {step < steps.length - 1 ? (
-            <button
-              onClick={() => setStep((s) => s + 1)}
-              className="rounded bg-green-600 px-4 py-2 text-white transition hover:bg-green-700"
-            >
-              Next
-            </button>
-          ) : (
-            <button className="rounded bg-green-600 px-4 py-2 text-white transition hover:bg-green-700">
-              Submit
-            </button>
-          )}
         </div>
       </div>
     </div>
@@ -156,7 +132,6 @@ function KYCForm({ onBack }) {
 
 function App() {
   const [showKYC, setShowKYC] = useState(false);
-
   return showKYC ? (
     <KYCForm onBack={() => setShowKYC(false)} />
   ) : (
@@ -164,11 +139,5 @@ function App() {
   );
 }
 
-const rootElement = document.getElementById("root");
-if (rootElement) {
-  createRoot(rootElement).render(
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  );
-}
+const root = document.getElementById("root");
+createRoot(root).render(<App />);
